@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XAct.Core.PCL" Version="0.0.5014" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dropshiping.BackEnd.DataAccess\Dropshiping.BackEnd.DataAccess.csproj" />
+    <ProjectReference Include="..\Dropshiping.BackEnd.Domain\Dropshiping.BackEnd.Domain.csproj" />
+    <ProjectReference Include="..\Dropshiping.BackEnd.Dtos\Dropshiping.BackEnd.Dtos.csproj" />
+    <ProjectReference Include="..\Dropshiping.BackEnd.Enums\Dropshiping.BackEnd.Enums.csproj" />
+    <ProjectReference Include="..\Dropshiping.BackEnd.Mappers\Dropshiping.BackEnd.Mappers.csproj" />
+  </ItemGroup>
+
+</Project>

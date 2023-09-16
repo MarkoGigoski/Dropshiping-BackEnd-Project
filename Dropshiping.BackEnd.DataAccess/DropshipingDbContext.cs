@@ -104,6 +104,11 @@ namespace Dropshiping.BackEnd.DataAccess
                 .WithOne(u => u.User)
                 .HasForeignKey(u => u.UserId);
 
+            modelBuilder.Entity<Category>()
+           .HasOne(c => c.Image)
+           .WithOne(i => i.Category)
+           .HasForeignKey<Image>(i => i.CategoryId);
+
         }
     }
 }

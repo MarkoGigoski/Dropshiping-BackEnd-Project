@@ -13,10 +13,12 @@ namespace Dropshiping.BackEnd.Domain.UserModels
         public int Age {  get; set; }
 
         //Need extra code for  assining tokens on creat/ how to do it?
-        public UserRoleEnum Role { get; set; }
+        public Role Role { get; set; }
+        public string RoleId {  get; set; }
 
         // Relations for products-cart
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<UserOrder> UserOrders { get; set; }
+        public virtual ICollection<Raiting> Raitings { get; set; }
 
     }
 }

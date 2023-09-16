@@ -7,12 +7,22 @@ namespace Dropshiping.BackEnd.Domain.ProductModels
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
-        public int Stock {  get; set; }
+        public Discount Discount { get; set; }
+
 
         // Properties for relations
-        public string UserId {  get; set; }
-        public string SubcategoryId { get; set; }
         public Subcategory Subcategory { get; set; }
-        public User User { get; set; }
+        public string SubcategoryId { get; set; }
+
+        public Region Region { get; set; }
+        public string RegoinId { get; set; }
+
+
+
+        public virtual ICollection<ProductSize> ProductSizes { get; set; }
+        public virtual ICollection<Raiting> Raitings { get; set; }
     }
 }
+
+        
+    

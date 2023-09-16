@@ -59,6 +59,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
                 Price = productDto.Price,
                 Description = productDto.Description,
                 Stock = productDto.Stock,
+                SubcategoryId = productDto.SubcategoryId,
             };
 
             _productRepository.Add(product);
@@ -73,6 +74,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             product.Price = productDto.Price;
             product.Description = productDto.Description;
             product.Stock = productDto.Stock;
+            product.SubcategoryId = productDto.SubcategoryId;
 
             if (product == null)
             {

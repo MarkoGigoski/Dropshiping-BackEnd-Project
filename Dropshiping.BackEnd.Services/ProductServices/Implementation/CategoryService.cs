@@ -57,7 +57,6 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             {
                 Name = categoryDto.Name,
                 Description = categoryDto.Description,
-                CatalogId = categoryDto.CatalogId,
             };
 
             _categoryRepository.Add(category);
@@ -71,7 +70,6 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             category.Id = categoryDto.Id;
             category.Name = categoryDto.Name;
             category.Description = categoryDto.Description;
-            category.CatalogId = categoryDto.CatalogId;
 
             if (categoryDto.Name == null)
             {

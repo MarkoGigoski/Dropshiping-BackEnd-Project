@@ -28,12 +28,12 @@ namespace Dropshiping.BackEnd.Helpers
         public static void InjectRepositories(IServiceCollection services)
         {
             // Product menagment Repositories
-            services.AddTransient<IRepository<Product>, ProductRepository> ();
-            services.AddTransient<IRepository<Category>, CategoryRepository> ();
+            services.AddTransient<IRepository<Category>, CategoryRepository>();
             services.AddTransient<IRepository<Subcategory>, SubcategoryRepository>();
-            //services.AddTransient<ICatalogService, CatalogService>();
-
-
+            services.AddTransient<IRepository<Product>, ProductRepository> ();
+            
+            
+            
 
             // User Repository
             services.AddTransient<IRepository<User>,UserRepository> ();
@@ -43,10 +43,10 @@ namespace Dropshiping.BackEnd.Helpers
         public static void InjectService(IServiceCollection services)
         {
             // Product menagment Services
-            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ISubcategoryService, SubcategoryService>();
-            //services.AddTransient<ICatalogService, CatalogService> ();
+            services.AddTransient<IProductService, ProductService>();
+
 
 
             // User Services

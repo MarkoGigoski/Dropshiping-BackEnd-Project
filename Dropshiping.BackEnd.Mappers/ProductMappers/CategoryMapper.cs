@@ -12,6 +12,18 @@ namespace Dropshiping.BackEnd.Mappers.ProductMappers
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
+                
+
+            };
+        }
+
+        public static CategoryDtoForImageObj ToDtoImage(this Category category)
+        {
+            return new CategoryDtoForImageObj
+            {
+                Id = category.Id,
+                Name = category.Name,
+                ImageName = category.CategoryImage.Name
             };
         }
     }

@@ -105,20 +105,20 @@ namespace Dropshiping.BackEnd.DataAccess
             // Configure relations ........
 
             // For Image
-            //modelBuilder.Entity<Product>()
-            //    .HasOne(p => p.ProductImage)
-            //    .WithOne()
-            //    .HasForeignKey<Product>(p => p.Id);
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.ProductImage)
+                .WithOne()
+                .HasForeignKey<Product>(p => p.ImageId);
 
-            //modelBuilder.Entity<Category>()
-            //    .HasOne(c => c.CategoryImage)
-            //    .WithOne()
-            //    .HasForeignKey<Category>(c => c.Id);
+            modelBuilder.Entity<Category>()
+                .HasOne(c => c.CategoryImage)
+                .WithOne()
+                .HasForeignKey<Category>(c => c.ImageId);
 
-            //modelBuilder.Entity<Subcategory>()
-            //    .HasOne(s => s.SubcategoryImage)
-            //    .WithOne()
-            //    .HasForeignKey<Subcategory>(s => s.Id);
+            modelBuilder.Entity<Subcategory>()
+                .HasOne(s => s.SubcategoryImage)
+                .WithOne()
+                .HasForeignKey<Subcategory>(s => s.ImageId);
 
             // For nesting category,sub,product
 

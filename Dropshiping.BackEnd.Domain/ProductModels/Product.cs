@@ -8,17 +8,18 @@ namespace Dropshiping.BackEnd.Domain.ProductModels
         public decimal Price { get; set; }
         public string Description { get; set; }
         public decimal Discount { get; set; }
-        public Image ProductImage { get; set; }
+        public string ImageId { get; set; }
+        public virtual Image ProductImage { get; set; }
 
         //public decimal Raiting { get; set; } kako ova?
 
 
         // Properties for relations
-        public Subcategory Subcategory { get; set; }
+        public virtual Subcategory Subcategory { get; set; }
         public string SubcategoryId { get; set; }
 
 
-        public Region Region { get; set; }
+        public virtual Region Region { get; set; }
         public string RegoinId { get; set; }
 
 

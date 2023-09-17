@@ -1,5 +1,6 @@
 ﻿using Dropshiping.BackEnd.DataAccess.Interface;
 using Dropshiping.BackEnd.Domain.ProductModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dropshiping.BackEnd.DataAccess.Implementation
 {
@@ -18,7 +19,7 @@ namespace Dropshiping.BackEnd.DataAccess.Implementation
 
         public Category GetById(string id)
         {
-            var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _dbContext.Categories.Include(x => x.CategoryImage).FirstOrDefault(c => c.Id == id);
 
             if (category == null)
             {

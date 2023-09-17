@@ -5,9 +5,9 @@
         public int Quantity { get; set; }
 
         // Relation conections
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
         public string OrderId { get; set; }
-        public ProductSize ProductSize { get; set; }
+        public virtual ProductSize ProductSize { get; set; }
         public string ProductSizeId {  get; set; }
 
     }

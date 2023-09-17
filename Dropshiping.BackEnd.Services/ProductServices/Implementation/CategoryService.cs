@@ -22,7 +22,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
         }
 
         // Get Category by Id
-        public CategoryDto GetById(string id)
+        public CategoryDtoForImageObj GetById(string id)
         {
             var category = _categoryRepository.GetById(id);
 
@@ -30,7 +30,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             {
                 throw new KeyNotFoundException($"Category with id {id} is not found");
             }
-            return category.ToDtoCat();
+            return category.ToDtoImage();
         }
 
         // Add Category
@@ -57,6 +57,8 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             {
                 Name = categoryDto.Name,
                 Description = categoryDto.Description,
+                ImageId = categoryDto.ImageId,
+               
             };
 
             _categoryRepository.Add(category);

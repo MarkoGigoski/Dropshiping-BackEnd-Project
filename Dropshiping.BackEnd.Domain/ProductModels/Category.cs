@@ -4,10 +4,10 @@
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public Image CategoryImage { get; set; }
-
 
         // Properties for relations
+        public string ImageId { get; set; }
+        public virtual Image CategoryImage { get; set; }
         public virtual ICollection<Subcategory> Subcategories { get; set; }
     }
 }

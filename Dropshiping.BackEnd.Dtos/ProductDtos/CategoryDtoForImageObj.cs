@@ -2,11 +2,10 @@
 
 namespace Dropshiping.BackEnd.Dtos.ProductDtos
 {
-    public class CategoryDto : BaseEntity
+    public class CategoryDtoForImageObj : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageId {  get; set; }
-       
+        public string ImageName {get; set;}
     }
 }

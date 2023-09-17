@@ -4,11 +4,12 @@
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string CategoryId { get; set; }
-        public Image SubcategoryImage { get; set; }
 
         // Properties for relations
-        public Category Category { get; set; }
+        public string CategoryId { get; set; }
+        public string ImageId { get; set; }
+        public virtual Image SubcategoryImage { get; set; }
+        public virtual Category Category { get; set; }
         public virtual ICollection<Product> Products { get; set; }
 
 

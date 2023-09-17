@@ -5,6 +5,7 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string CategoryId { get; set; }
+        public Image SubcategoryImage { get; set; }
 
         // Properties for relations
         public Category Category { get; set; }

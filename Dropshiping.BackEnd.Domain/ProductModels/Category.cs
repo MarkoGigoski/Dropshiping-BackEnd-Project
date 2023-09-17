@@ -4,6 +4,7 @@
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public Image CategoryImage { get; set; }
 
 
         // Properties for relations

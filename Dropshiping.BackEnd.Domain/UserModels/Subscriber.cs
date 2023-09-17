@@ -1,4 +1,4 @@
-﻿namespace Dropshiping.BackEnd.Domain
+﻿namespace Dropshiping.BackEnd.Domain.UserModels
 {
     public class Subscriber : BaseEntity
     {

@@ -10,10 +10,21 @@ namespace Dropshiping.BackEnd.DataAccess
         {
 
         }
+
+        // Tables
         public DbSet<Product> Products { get; set; }
         public DbSet<Subcategory> Subcategories { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<Orderitem> Orderitems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<UserOrder> UserOrders { get; set; }
+        public DbSet<Raiting> Raitings { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -34,6 +45,14 @@ namespace Dropshiping.BackEnd.DataAccess
 
             modelBuilder.Entity<Product>()
                 .Property(x => x.Price)
+                .HasColumnType("decimal(18,4)");
+
+            modelBuilder.Entity<Order>()
+                .Property(x => x.TotalPrice)
+                .HasColumnType("decimal(18,4)");
+
+            modelBuilder.Entity<Product>()
+                .Property(x => x.Discount)
                 .HasColumnType("decimal(18,4)");
 
             // Subcategory
@@ -83,32 +102,82 @@ namespace Dropshiping.BackEnd.DataAccess
                 .Property(x => x.Email)
                 .HasMaxLength(50);
 
-            modelBuilder.Entity<User>()
-                .Property(x => x.Role)
-                .IsRequired();
+            // Configure relations ........
 
+            // For Image
+            //modelBuilder.Entity<Product>()
+            //    .HasOne(p => p.ProductImage)
+            //    .WithOne()
+            //    .HasForeignKey<Product>(p => p.Id);
 
-            // Configure relationships 
+            //modelBuilder.Entity<Category>()
+            //    .HasOne(c => c.CategoryImage)
+            //    .WithOne()
+            //    .HasForeignKey<Category>(c => c.Id);
+
+            //modelBuilder.Entity<Subcategory>()
+            //    .HasOne(s => s.SubcategoryImage)
+            //    .WithOne()
+            //    .HasForeignKey<Subcategory>(s => s.Id);
+
+            // For nesting category,sub,product
+
+            modelBuilder.Entity<Category>()
+                        .HasMany(c => c.Subcategories)
+                        .WithOne(s => s.Category)
+                        .HasForeignKey(s => s.CategoryId); 
+
             modelBuilder.Entity<Subcategory>()
-                .HasMany(p => p.Products)
-                .WithOne(s => s.Subcategory)
-                .HasForeignKey(s => s.SubcategoryId);
+                .HasMany(s => s.Products)
+                .WithOne(p => p.Subcategory)
+                .HasForeignKey(p => p.SubcategoryId);
 
-            modelBuilder.Entity<Category>()
-                        .HasMany(s => s.Subcategories)
-                        .WithOne(c => c.Category)
-                        .HasForeignKey(c => c.CategoryId);
+            // For Produc/User business wise
+
+            modelBuilder.Entity<Region>()
+                .HasMany(p => p.Products)
+                .WithOne(r => r.Region)
+                .HasForeignKey(p => p.RegoinId);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(ps => ps.ProductSizes)
+                .WithOne(p => p.Product)
+                .HasForeignKey(ps => ps.ProductId);
+
+            modelBuilder.Entity<ProductSize>()
+                .HasOne(ps => ps.Size)
+                .WithMany(s => s.ProductSizes)
+                .HasForeignKey(ps => ps.SizeId);
+
+            modelBuilder.Entity<Orderitem>()
+                .HasOne(oi => oi.ProductSize)
+                .WithMany(ps => ps.Orderitems)
+                .HasForeignKey(oi => oi.ProductSizeId);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(oi => oi.Orderitems)
+                .WithOne(o => o.Order)
+                .HasForeignKey(oi => oi.OrderId);
+
+            modelBuilder.Entity<UserOrder>()
+                .HasOne(uo => uo.Order)
+                .WithMany(o => o.Userorders)
+                .HasForeignKey(uo => uo.OrderId);
 
             modelBuilder.Entity<User>()
-                .HasMany(p => p.Products)
-                .WithOne(u => u.User)
-                .HasForeignKey(u => u.UserId);
+                .HasMany(u => u.UserOrders)
+                .WithOne(uo => uo.User)
+                .HasForeignKey(uo => uo.UserId);
 
-            modelBuilder.Entity<Category>()
-           .HasOne(c => c.Image)
-           .WithOne(i => i.Category)
-           .HasForeignKey<Image>(i => i.CategoryId);
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Raitings)
+                .WithOne(ra => ra.User)
+                .HasForeignKey(ra => ra.UserId);
 
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Cards)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId);
         }
     }
 }

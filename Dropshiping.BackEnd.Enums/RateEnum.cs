@@ -5,6 +5,7 @@
         Bad = 1,
         Medium,
         Good,
-        Super
+        Super,
+        Extra
     }
 }

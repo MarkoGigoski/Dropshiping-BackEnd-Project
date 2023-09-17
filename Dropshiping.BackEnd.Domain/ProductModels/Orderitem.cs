@@ -5,10 +5,10 @@
         public int Quantity { get; set; }
 
         // Relation conections
-        public Product Product { get; set; }
-        public string ProductId { get; set; }
         public Order Order { get; set; }
         public string OrderId { get; set; }
+        public ProductSize ProductSize { get; set; }
+        public string ProductSizeId {  get; set; }
 
     }
 }

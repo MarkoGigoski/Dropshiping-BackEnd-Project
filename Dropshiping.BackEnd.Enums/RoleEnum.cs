@@ -3,7 +3,7 @@
     public enum RoleEnum
     {
         User = 1,
-        PrimeUser,
+        Courier,
         Admin,
     }
 }

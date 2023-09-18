@@ -2,8 +2,8 @@
 {
     public enum StatusEnum
     {
-        Ordered = 1,
-        Shipping,
+        Purchased = 1,
+        OnTheWay,
         Delivered
 
     }

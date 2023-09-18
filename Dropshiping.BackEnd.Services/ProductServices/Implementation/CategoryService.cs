@@ -9,9 +9,11 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
     public class CategoryService : ICategoryService
     {
         private IRepository<Category> _categoryRepository;
+        
         public CategoryService(IRepository<Category> categoryRepository)
         {
             _categoryRepository = categoryRepository;
+            
         }
 
         // Get all Categories

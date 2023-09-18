@@ -2,8 +2,7 @@
 {
     public enum PaymentStatusEnum
     {
-        payed = 1,
-        denined,
-        credit,  //only for examples will be change
+        Paid = 1,
+        PayingOnDelivery
     }
 }

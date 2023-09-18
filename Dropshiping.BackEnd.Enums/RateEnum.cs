@@ -2,10 +2,10 @@
 {
     public enum RateEnum
     {
-        Bad = 1,
-        Medium,
-        Good,
-        Super,
-        Extra
+        One = 1,
+        Two,
+        Three,
+        Four,
+        Five,
     }
 }

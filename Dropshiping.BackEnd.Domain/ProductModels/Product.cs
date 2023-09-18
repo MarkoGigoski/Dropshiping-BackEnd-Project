@@ -11,7 +11,7 @@ namespace Dropshiping.BackEnd.Domain.ProductModels
         public string ImageId { get; set; }
         public virtual Image ProductImage { get; set; }
 
-        //public decimal Raiting { get; set; } kako ova?
+        //public decimal Raiting { get; set; } 
 
 
         // Properties for relations

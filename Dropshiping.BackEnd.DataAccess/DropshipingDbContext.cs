@@ -25,6 +25,8 @@ namespace Dropshiping.BackEnd.DataAccess
         public DbSet<UserOrder> UserOrders { get; set; }
         public DbSet<Raiting> Raitings { get; set; }
         
+
+        // OnModel
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

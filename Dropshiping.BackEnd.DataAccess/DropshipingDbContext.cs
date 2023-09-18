@@ -57,6 +57,10 @@ namespace Dropshiping.BackEnd.DataAccess
                 .Property(x => x.Discount)
                 .HasColumnType("decimal(18,4)");
 
+            modelBuilder.Entity<Region>()
+                .Property(x => x.Shipping)
+                .HasColumnType("decimal(18,4)");
+
             // Subcategory
             modelBuilder.Entity<Subcategory>()
                 .Property(x => x.Name)

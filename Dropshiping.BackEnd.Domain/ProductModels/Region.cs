@@ -6,7 +6,7 @@ namespace Dropshiping.BackEnd.Domain.ProductModels
     {
         public string Name { get; set; }
         //public string Shiping {  get; set; } // Of what type?
-        public ShippingEnum Shipping { get; set; }
+        public decimal Shipping { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

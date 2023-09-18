@@ -108,7 +108,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
                 throw new ArgumentException("You must enter id");
             }
 
-            _subcategoryRepository.GetById(subcategory.Id);
+            _subcategoryRepository.Delete(subcategory.Id);
         } 
     }
 }

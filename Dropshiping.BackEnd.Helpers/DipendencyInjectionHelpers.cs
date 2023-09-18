@@ -32,6 +32,7 @@ namespace Dropshiping.BackEnd.Helpers
             services.AddTransient<IRepository<Subcategory>, SubcategoryRepository>();
             services.AddTransient<IRepository<Product>, ProductRepository>();
             services.AddTransient<IRepository<Image>, ImageRepository>();
+            services.AddTransient<IRepository<Region>, RegionRepository>();
             
             
             
@@ -48,6 +49,7 @@ namespace Dropshiping.BackEnd.Helpers
             services.AddTransient<ISubcategoryService, SubcategoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IRegionService, RegionService>();
 
 
 

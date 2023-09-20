@@ -201,6 +201,9 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                     b.Property<string>("Review")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -221,8 +224,8 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Shipping")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Shipping")
+                        .HasColumnType("decimal(18,4)");
 
                     b.HasKey("Id");
 

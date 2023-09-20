@@ -1,6 +1,6 @@
 ﻿using Dropshiping.BackEnd.DataAccess.Interface;
 using Dropshiping.BackEnd.Domain.ProductModels;
-using Dropshiping.BackEnd.Dtos.ProductDtos;
+using Dropshiping.BackEnd.Dtos.ProductDtos.CategoryDtos;
 using Dropshiping.BackEnd.Mappers.ProductMappers;
 using Dropshiping.BackEnd.Services.ProductServices.Interface;
 
@@ -8,9 +8,9 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
 {
     public class CategoryService : ICategoryService
     {
-        private IRepository<Category> _categoryRepository;
+        private ICategoryRepository _categoryRepository;
         
-        public CategoryService(IRepository<Category> categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
             
@@ -33,6 +33,17 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
                 throw new KeyNotFoundException($"Category with id {id} is not found");
             }
             return category.ToDtoImage();
+        }
+
+        public CategoryDto GetByIdNested(string id)
+        {
+            var category = _categoryRepository.GetByIdNest(id);
+
+            if (category == null)
+            {
+                throw new KeyNotFoundException($"Category with id {id} is not found");
+            }
+            return category.ToDtoCat();
         }
 
         // Add Category
@@ -98,7 +109,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
         // Delete Category by Id
         public void DeleteById(string id)
         {
-            var category = _categoryRepository.GetById(id);
+            var category = GetById(id);
 
             if (category.Id == null)
             {
@@ -111,5 +122,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
 
             _categoryRepository.Delete(category.Id);
         }
+
+        
     }
 }

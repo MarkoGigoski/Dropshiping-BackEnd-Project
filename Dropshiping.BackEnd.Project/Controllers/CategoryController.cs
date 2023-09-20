@@ -1,7 +1,5 @@
-﻿using Dropshiping.BackEnd.Dtos.ProductDtos;
-using Dropshiping.BackEnd.Services.ProductServices.Implementation;
+﻿using Dropshiping.BackEnd.Dtos.ProductDtos.CategoryDtos;
 using Dropshiping.BackEnd.Services.ProductServices.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dropshiping.BackEnd.Project.Controllers
@@ -38,6 +36,24 @@ namespace Dropshiping.BackEnd.Project.Controllers
             {
                 var category = _categoryService.GetById(id);
 
+                return Ok(category);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error happend");
+            }
+        }
+
+        [HttpGet("Nested{id}")]
+        public IActionResult GetByIdNested(string id)
+        {
+            try
+            {
+                var category = _categoryService.GetByIdNested(id);
                 return Ok(category);
             }
             catch (KeyNotFoundException ex)

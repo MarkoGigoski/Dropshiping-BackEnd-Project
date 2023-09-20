@@ -10,16 +10,6 @@ namespace Dropshiping.BackEnd.DataAccess.Implementation
         {
             _dbContext = dbContext;
         }
-        public void Add(Image entity)
-        {
-            _dbContext.Images.Add(entity);  
-            _dbContext.SaveChanges();
-        }
-
-        public void Delete(string id)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<Image> GetAll()
         {
@@ -31,9 +21,26 @@ namespace Dropshiping.BackEnd.DataAccess.Implementation
             throw new NotImplementedException();
         }
 
+        public void Add(Image entity)
+        {
+            _dbContext.Images.Add(entity);  
+            _dbContext.SaveChanges();
+        }
+
         public void Update(Image entity)
         {
             throw new NotImplementedException();
         }
+
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+
+        
+
+        
     }
 }

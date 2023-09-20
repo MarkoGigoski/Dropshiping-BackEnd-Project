@@ -7,6 +7,7 @@ namespace Dropshiping.BackEnd.Domain.ProductModels
     {
         public RateEnum Rate {  get; set; }
         public string Review { get; set; }
+        public string Title {  get; set; }
 
         // Relation conections
         public virtual Product Product { get; set; }

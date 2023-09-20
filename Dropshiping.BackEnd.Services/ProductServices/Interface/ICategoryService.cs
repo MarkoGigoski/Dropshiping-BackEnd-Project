@@ -1,4 +1,4 @@
-﻿using Dropshiping.BackEnd.Dtos.ProductDtos;
+﻿using Dropshiping.BackEnd.Dtos.ProductDtos.CategoryDtos;
 
 namespace Dropshiping.BackEnd.Services.ProductServices.Interface
 {
@@ -6,6 +6,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Interface
     {
         List<CategoryDto> GetAll();
         CategoryDtoForImageObj GetById(string id);
+        CategoryDto GetByIdNested(string id);
         void Add(CategoryDto categoryDto);
         void Update(CategoryDto categoryDto);
         void DeleteById(string id);

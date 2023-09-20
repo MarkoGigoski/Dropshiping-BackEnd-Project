@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dropshiping.BackEnd.DataAccess.Implementation
 {
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : ICategoryRepository
     {
         private DropshipingDbContext _dbContext;
         public CategoryRepository(DropshipingDbContext dbContext)
@@ -19,7 +19,17 @@ namespace Dropshiping.BackEnd.DataAccess.Implementation
 
         public Category GetById(string id)
         {
-            var category = _dbContext.Categories.Include(x => x.CategoryImage).FirstOrDefault(c => c.Id == id);
+            var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (category == null)
+            {
+                throw new KeyNotFoundException($"Category with id {id} does not exist");
+            }
+            return category;
+        }
+        public Category GetByIdNest(string id)
+        {
+            var category = _dbContext.Categories.Include(x => x.Subcategories).ThenInclude(x => x.Products.Select(p => new { p.ProductSizes, p.Region, p.Raitings })).FirstOrDefault(c => c.Id == id);
 
             if (category == null)
             {
@@ -46,6 +56,7 @@ namespace Dropshiping.BackEnd.DataAccess.Implementation
 
             _dbContext.Categories.Remove(category);
             _dbContext.SaveChanges();
-        } 
+        }
+
     }
 }

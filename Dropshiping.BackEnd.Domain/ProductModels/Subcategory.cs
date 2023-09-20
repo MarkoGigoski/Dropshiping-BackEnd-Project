@@ -7,8 +7,6 @@
 
         // Properties for relations
         public string CategoryId { get; set; }
-        public string ImageId { get; set; }
-        public virtual Image SubcategoryImage { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<Product> Products { get; set; }
 

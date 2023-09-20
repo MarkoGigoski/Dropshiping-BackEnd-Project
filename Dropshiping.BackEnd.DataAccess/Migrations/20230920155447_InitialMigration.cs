@@ -6,22 +6,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Dropshiping.BackEnd.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Images",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Data = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,21 +91,21 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "Subcategories",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    ImageId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_Subcategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
+                        name: "FK_Subcategories_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id");
                 });
 
@@ -154,31 +154,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Subcategories",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ImageId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subcategories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Subcategories_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Subcategories_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -188,17 +163,11 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Discount = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     SubcategoryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ImageId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     RegoinId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Regions_RegoinId",
                         column: x => x.RegoinId,
@@ -291,13 +260,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_ImageId",
-                table: "Categories",
-                column: "ImageId",
-                unique: true,
-                filter: "[ImageId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orderitems_OrderId",
                 table: "Orderitems",
                 column: "OrderId");
@@ -306,13 +268,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                 name: "IX_Orderitems_ProductSizeId",
                 table: "Orderitems",
                 column: "ProductSizeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_ImageId",
-                table: "Products",
-                column: "ImageId",
-                unique: true,
-                filter: "[ImageId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_RegoinId",
@@ -348,13 +303,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                 name: "IX_Subcategories_CategoryId",
                 table: "Subcategories",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Subcategories_ImageId",
-                table: "Subcategories",
-                column: "ImageId",
-                unique: true,
-                filter: "[ImageId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserOrders_OrderId",
@@ -405,9 +353,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Images");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Dropshiping.BackEnd.DataAccess
         public DbSet<Subcategory> Subcategories { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Image> Images { get; set; }
+        //public DbSet<Image> Images { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
@@ -109,22 +109,6 @@ namespace Dropshiping.BackEnd.DataAccess
                 .HasMaxLength(50);
 
             // Configure relations ........
-
-            // For Image
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.ProductImage)
-                .WithOne()
-                .HasForeignKey<Product>(p => p.ImageId);
-
-            modelBuilder.Entity<Category>()
-                .HasOne(c => c.CategoryImage)
-                .WithOne()
-                .HasForeignKey<Category>(c => c.ImageId);
-
-            modelBuilder.Entity<Subcategory>()
-                .HasOne(s => s.SubcategoryImage)
-                .WithOne()
-                .HasForeignKey<Subcategory>(s => s.ImageId);
 
             // For nesting category,sub,product
 

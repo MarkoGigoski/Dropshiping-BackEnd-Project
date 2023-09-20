@@ -1,5 +1,7 @@
-﻿using Dropshiping.BackEnd.DataAccess.Interface;
+﻿using System.Collections.Generic;
+using Dropshiping.BackEnd.DataAccess.Interface;
 using Dropshiping.BackEnd.Domain.ProductModels;
+using Dropshiping.BackEnd.Dtos.ProductDtos;
 using Dropshiping.BackEnd.Dtos.ProductDtos.CategoryDtos;
 using Dropshiping.BackEnd.Mappers.ProductMappers;
 using Dropshiping.BackEnd.Services.ProductServices.Interface;
@@ -9,11 +11,12 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
     public class CategoryService : ICategoryService
     {
         private ICategoryRepository _categoryRepository;
+       
         
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
-            
+     
         }
 
         // Get all Categories
@@ -24,7 +27,7 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
         }
 
         // Get Category by Id
-        public CategoryDtoForImageObj GetById(string id)
+        public CategoryDto GetById(string id)
         {
             var category = _categoryRepository.GetById(id);
 
@@ -32,10 +35,11 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             {
                 throw new KeyNotFoundException($"Category with id {id} is not found");
             }
-            return category.ToDtoImage();
+            return category.ToDtoCat();
         }
 
-        public CategoryDto GetByIdNested(string id)
+        // Nested
+        public List<ProductDto> GetByIdNested(string id)
         {
             var category = _categoryRepository.GetByIdNest(id);
 
@@ -43,7 +47,18 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             {
                 throw new KeyNotFoundException($"Category with id {id} is not found");
             }
-            return category.ToDtoCat();
+            
+            var  listOfProducts = category.Subcategories.SelectMany(x => x.Products).ToList();
+
+            List<ProductDto> listOfProductMapped = new();
+
+            foreach(var product in listOfProducts)
+            {
+                listOfProductMapped.Add(product.ToDto());
+            }
+
+            return listOfProductMapped;
+
         }
 
         // Add Category
@@ -70,8 +85,6 @@ namespace Dropshiping.BackEnd.Services.ProductServices.Implementation
             {
                 Name = categoryDto.Name,
                 Description = categoryDto.Description,
-                ImageId = categoryDto.ImageId,
-               
             };
 
             _categoryRepository.Add(category);

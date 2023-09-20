@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dropshiping.BackEnd.DataAccess.Migrations
 {
     [DbContext(typeof(DropshipingDbContext))]
-    [Migration("20230920091430_InitMigration")]
-    partial class InitMigration
+    [Migration("20230920155447_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,9 +35,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -45,27 +42,7 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
-
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Dropshiping.BackEnd.Domain.ProductModels.Image", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<byte[]>("Data")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Dropshiping.BackEnd.Domain.ProductModels.Order", b =>
@@ -137,9 +114,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,4)");
 
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -155,10 +129,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
 
                     b.HasIndex("RegoinId");
 
@@ -261,9 +231,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -272,10 +239,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
 
                     b.ToTable("Subcategories");
                 });
@@ -379,15 +342,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                     b.ToTable("UserOrders");
                 });
 
-            modelBuilder.Entity("Dropshiping.BackEnd.Domain.ProductModels.Category", b =>
-                {
-                    b.HasOne("Dropshiping.BackEnd.Domain.ProductModels.Image", "CategoryImage")
-                        .WithOne()
-                        .HasForeignKey("Dropshiping.BackEnd.Domain.ProductModels.Category", "ImageId");
-
-                    b.Navigation("CategoryImage");
-                });
-
             modelBuilder.Entity("Dropshiping.BackEnd.Domain.ProductModels.Orderitem", b =>
                 {
                     b.HasOne("Dropshiping.BackEnd.Domain.ProductModels.Order", "Order")
@@ -405,10 +359,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
 
             modelBuilder.Entity("Dropshiping.BackEnd.Domain.ProductModels.Product", b =>
                 {
-                    b.HasOne("Dropshiping.BackEnd.Domain.ProductModels.Image", "ProductImage")
-                        .WithOne()
-                        .HasForeignKey("Dropshiping.BackEnd.Domain.ProductModels.Product", "ImageId");
-
                     b.HasOne("Dropshiping.BackEnd.Domain.ProductModels.Region", "Region")
                         .WithMany("Products")
                         .HasForeignKey("RegoinId");
@@ -416,8 +366,6 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                     b.HasOne("Dropshiping.BackEnd.Domain.ProductModels.Subcategory", "Subcategory")
                         .WithMany("Products")
                         .HasForeignKey("SubcategoryId");
-
-                    b.Navigation("ProductImage");
 
                     b.Navigation("Region");
 
@@ -460,13 +408,7 @@ namespace Dropshiping.BackEnd.DataAccess.Migrations
                         .WithMany("Subcategories")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("Dropshiping.BackEnd.Domain.ProductModels.Image", "SubcategoryImage")
-                        .WithOne()
-                        .HasForeignKey("Dropshiping.BackEnd.Domain.ProductModels.Subcategory", "ImageId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("SubcategoryImage");
                 });
 
             modelBuilder.Entity("Dropshiping.BackEnd.Domain.UserModels.Card", b =>

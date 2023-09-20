@@ -16,9 +16,6 @@ namespace Dropshiping.BackEnd.Domain.ProductModels
         public virtual Subcategory Subcategory { get; set; }
         public string SubcategoryId { get; set; }
 
-        public string ImageId { get; set; }
-        public virtual Image ProductImage { get; set; }
-
 
         public virtual Region Region { get; set; }
         public string RegoinId { get; set; }

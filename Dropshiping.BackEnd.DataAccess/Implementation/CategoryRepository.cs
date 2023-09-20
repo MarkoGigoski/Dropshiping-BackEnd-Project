@@ -29,7 +29,11 @@ namespace Dropshiping.BackEnd.DataAccess.Implementation
         }
         public Category GetByIdNest(string id)
         {
-            var category = _dbContext.Categories.Include(x => x.Subcategories).ThenInclude(x => x.Products.Select(p => new { p.ProductSizes, p.Region, p.Raitings })).FirstOrDefault(c => c.Id == id);
+            var category = _dbContext.Categories.
+                Include(x => x.Subcategories).ThenInclude(x => x.Products).ThenInclude(x => x.Region)
+                .Include(x => x.Subcategories).ThenInclude(x => x.Products).ThenInclude(x => x.ProductSizes)
+                .Include(x => x.Subcategories).ThenInclude(x => x.Products).ThenInclude(x => x.Region)
+                .FirstOrDefault(c => c.Id == id);
 
             if (category == null)
             {

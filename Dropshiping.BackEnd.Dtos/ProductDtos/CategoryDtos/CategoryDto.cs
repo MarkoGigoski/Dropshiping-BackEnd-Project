@@ -6,7 +6,5 @@ namespace Dropshiping.BackEnd.Dtos.ProductDtos.CategoryDtos
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageId { get; set; }
-
     }
 }

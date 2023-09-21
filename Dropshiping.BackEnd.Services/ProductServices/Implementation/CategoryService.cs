@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Dropshiping.BackEnd.DataAccess.Interface;
+﻿using Dropshiping.BackEnd.DataAccess.Interface;
 using Dropshiping.BackEnd.Domain.ProductModels;
 using Dropshiping.BackEnd.Dtos.ProductDtos;
 using Dropshiping.BackEnd.Dtos.ProductDtos.CategoryDtos;

@@ -1,5 +1,4 @@
 ﻿using Dropshiping.BackEnd.Domain.ProductModels;
-using Dropshiping.BackEnd.Dtos;
 using Dropshiping.BackEnd.Dtos.ProductDtos;
 
 namespace Dropshiping.BackEnd.Mappers.ProductMappers

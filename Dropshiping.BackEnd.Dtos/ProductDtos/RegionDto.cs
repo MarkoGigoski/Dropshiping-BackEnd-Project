@@ -1,5 +1,4 @@
 ﻿using Dropshiping.BackEnd.Domain;
-using Dropshiping.BackEnd.Enums;
 
 namespace Dropshiping.BackEnd.Dtos.ProductDtos
 {

@@ -12,8 +12,6 @@ namespace Dropshiping.BackEnd.Mappers.ProductMappers
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
-                
-
             };
         }
     }

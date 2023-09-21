@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dropshiping.BackEnd.Domain;
+﻿using Dropshiping.BackEnd.Domain;
 
 namespace Dropshiping.BackEnd.Dtos.ProductDtos
 {
